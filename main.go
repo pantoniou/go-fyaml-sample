@@ -77,7 +77,11 @@ func main() {
     }
 
     // output, in pretty mode always
-    data, err = fyaml.Marshal(&v, debug, verbose, json, resolve, "output-mode=pretty")
+    output := "output-mode=pretty"
+    if json != "" {
+        output = "output-mode=json" // or in json mode...
+    }
+    data, err = fyaml.Marshal(&v, debug, verbose, output)
     if err != nil {
         log.Fatal(fmt.Sprintf("Marshal failed: %s", err.Error()))
     }
